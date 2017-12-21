@@ -14,7 +14,7 @@
     "lib": ["es2016", "dom"]
   },
   "files": [
-    "./ng4-configure.ts"
+    "./ngx-configure.ts"
   ],
   "exclude": [
     "node_modules",

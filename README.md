@@ -1,14 +1,15 @@
-# ng4-configure
+# ngx-configure
 
-angular 4 library to easily load a configuration file prior to application initialization and use it anywhere in your app.<br />
-<br />
-Screenshot of demo app:
-![image](https://user-images.githubusercontent.com/9122526/29547764-14cd008e-86ca-11e7-9768-2f2e516a8f24.png)
+Angular library to easily load a configuration file prior to application initialization and use it anywhere in your app.
+
+In base of a Paul work Ng4-Cofigure ( https://github.com/mcdonaldp2/ng4-configure ) 
+
 ## Usage
 
-1. Use NPM to install ng4-configure into your project
+1. Use NPM to install ngx-configure into your project
 
-    ``` npm install ng4-configure --save ```
+``` npm install ng4-configure --save ```
+
 2. Create a JSON config file for your project and store it somewhere accessible by the browser 
     ```json
     {
@@ -23,7 +24,7 @@ Screenshot of demo app:
 
    ```javascript
    
-      import { ConfigureOptions } from 'ng4-configure/ng4-configure';
+      import { ConfigureOptions } from 'ngx-configure/ngx-configure';
 
       export class MyOptions extends ConfigureOptions {
         ConfigurationURL: string = 'assets/config.json';
