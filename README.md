@@ -8,7 +8,7 @@ In base of a Paul work Ng4-Cofigure ( https://github.com/mcdonaldp2/ng4-configur
 
 1. Use NPM to install ngx-configure into your project
 
-``` npm install ng4-configure --save ```
+``` npm install ngx-configure --save ```
 
 2. Create a JSON config file for your project and store it somewhere accessible by the browser 
     ```json
@@ -16,7 +16,7 @@ In base of a Paul work Ng4-Cofigure ( https://github.com/mcdonaldp2/ng4-configur
       "name": "Paul",
       "favoriteColor": "green",
       "google": "https://google.com",
-      "ng4_configure_repo": "https://github.com/mcdonaldp2/ng4-configure"
+      "ngx_configure_repo": "https://github.com/catrielmuller/ngx-configure"
     }
     ```
     a) In the demo this is stored in demo/src/assets/config.json 
@@ -39,7 +39,7 @@ In base of a Paul work Ng4-Cofigure ( https://github.com/mcdonaldp2/ng4-configur
         import { MyOptions }  from './my-options'
         import { BrowserModule } from '@angular/platform-browser';
         import { NgModule } from '@angular/core';
-        import { NgConfigureModule, ConfigureOptions } from 'ng4-configure/ng4-configure'
+        import { NgConfigureModule, ConfigureOptions } from 'ngx-configure/ngx-configure'
         import { AppComponent } from './app.component';
 
         
@@ -60,7 +60,7 @@ In base of a Paul work Ng4-Cofigure ( https://github.com/mcdonaldp2/ng4-configur
     ``` app.component.ts ```
     ```javascript
       import { Component } from '@angular/core';
-      import { ConfigureService } from 'ng4-configure/ng4-configure';
+      import { ConfigureService } from 'ngx-configure/ngx-configure';
       @Component({
         selector: 'app-root',
         templateUrl: './app.component.html',
@@ -70,7 +70,7 @@ In base of a Paul work Ng4-Cofigure ( https://github.com/mcdonaldp2/ng4-configur
         title = 'app';
 
         constructor(public configService: ConfigureService) {
-          console.log("Here is the config loaded by ng4-configure:")
+          console.log("Here is the config loaded by ngx-configure:")
           console.log(configService.config);
         }
       }
@@ -80,14 +80,14 @@ In base of a Paul work Ng4-Cofigure ( https://github.com/mcdonaldp2/ng4-configur
     ```html
     <div style="text-align:center">
     <h1>
-      Welcome to the ng4-configure demo app!
+      Welcome to the ngx-configure demo app!
     </h1>
     <div style="padding: 15px">
       <p> 
         Hi! My name is {{this.configService.config.name}}.
       </p>
       <p>
-        The url of this repo is <b>{{this.configService.config.ng4_configure_repo}}</b>
+        The url of this repo is <b>{{this.configService.config.ngx_configure_repo}}</b>
       </p>
       <p>
         Here is a link to <a [href]="this.configService.config.google">Google</a>
