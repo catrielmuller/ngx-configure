@@ -1,27 +1,110 @@
-# NgxConfigureApp
+# ngx-configure
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.5.
+Angular library to easily load a configuration file prior to application initialization and use it anywhere in your app.
 
-## Development server
+In base of a Paul work Ng4-Cofigure ( https://github.com/mcdonaldp2/ng4-configure ) 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Usage
 
-## Code scaffolding
+1. Use NPM to install ngx-configure into your project.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+``` 
+npm install ngx-configure --save 
+```
 
-## Build
+2. Create a JSON config file for your project and store it somewhere accessible by the browser or in another server if you want.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```json
+{
+  "name": "Catriel Müller",
+  "favoriteColor": "Black",
+  "google": "https://google.com",
+  "ngx_configure_repo": "https://github.com/catrielmuller/ngx-configure/"
+}
+```
 
-## Running unit tests
+a) In the demo this is stored in src/assets/config.json
+     
+3. Create a custom options class that extends NgxConfigureOptions:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```javascript
+import { NgxConfigureOptions } from 'ngx-configure';
 
-## Running end-to-end tests
+export class AppOptions extends NgxConfigureOptions {
+  ConfigurationURL = 'assets/appconfig.json';
+  AppVersion = '0.0.0';
+  BustCache = false;
+}
+```
+4. Add NgxConfigureModule, NgxConfigureOptions and your custom NgxConfigureOptions into your AppModule. 
+Make sure to provide your custom ConfigureOptions.  `app.module.ts` should look something like this:
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```javascript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-## Further help
+import { NgxConfigureModule, NgxConfigureOptions } from 'ngx-configure';
+import { AppOptions } from './app.options';
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    NgxConfigureModule.forRoot()
+  ],
+  providers: [
+    { provide: NgxConfigureOptions, useClass: AppOptions }
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+ 
+5.  Inject ConfigureService into any place in your project to access the config object in your code:
+
+``` app.component.ts ```
+```javascript
+import { Component } from '@angular/core';
+import { NgxConfigureService } from 'ngx-configure';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  public config: any;
+
+  constructor (configService: NgxConfigureService) {
+    this.config = configService.config;
+  }
+}
+```
+
+``` app.component.html ```
+```html
+<div style="text-align:center">
+  <h1>
+    Welcome to Ngx-Configure!
+  </h1>  
+</div>
+<p>Loaded configuration from: <a href="/assets/appconfig.json" target="_blank">/assets/appconfig.json</a></p>
+<pre>{{ config | json }}</pre>
+ ```
+    
+## ConfigureOptions Attributes
+
+#### ConfigurationURL
+  Specifies the location of the configuration file.  By default this location is set to ```'assets/config.json'```
+#### AppVersion
+  Specifies the version of the application.  To ensure that client browsers are getting the latest version of your config file after a release and not just a version that is cached in the browser, change this value when doing releases. The version will be appended to the url like so: <br />
+    ``` http://localhost:1495/assets/config.json?v=<AppVersion> ```
+  By default this is blank and will not append anything to the ConfigurationURL.
+#### BustCache
+  If set to true, will generate a random value to end of the ConfigurationURL to ensure that the config file is never cached:
+  ``` http://localhost:1495/assets/config.json?t=<random value> ```
+  By default this is set to false.  

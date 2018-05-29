@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgxConfigureService } from 'ngx-configure';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  public config: any;
+
+  constructor (configService: NgxConfigureService) {
+    this.config = configService.config;
+  }
 }
