@@ -1,5 +1,4 @@
 import { TestBed, inject } from '@angular/core/testing';
-
 import { NgxConfigureOptions } from './ngx-configure-options';
 
 describe('NgxConfigureOptions', () => {
