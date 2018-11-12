@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgxConfigureOptions } from './ngx-configure-options';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpBackend } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,11 @@ import { HttpClient } from '@angular/common/http';
 export class NgxConfigureService {
   public config: any;
 
-  constructor(public configOptions: NgxConfigureOptions, private http: HttpClient) {
+  private http: HttpClient;
+
+  constructor(public configOptions: NgxConfigureOptions, private handler: HttpBackend) {
+    // See: https://stackoverflow.com/a/49013534/13278 (bypass all interceptors)
+    this.http = new HttpClient(handler);
   }
 
   load(): Promise<any> {

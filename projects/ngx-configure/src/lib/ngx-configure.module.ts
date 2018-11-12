@@ -1,5 +1,5 @@
 import { NgModule, ModuleWithProviders, APP_INITIALIZER } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpBackend, HttpClientModule } from '@angular/common/http';
 import { NgxConfigureService } from './ngx-configure.service';
 import { NgxConfigureOptions } from './ngx-configure-options';
 
@@ -16,7 +16,7 @@ import { NgxConfigureOptions } from './ngx-configure-options';
       provide: APP_INITIALIZER,
       useFactory: init,
       multi: true,
-      deps: [NgxConfigureService, HttpClient]
+      deps: [NgxConfigureService, HttpBackend]
     }
   ]
 })
