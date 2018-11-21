@@ -33,7 +33,12 @@ export class NgxConfigureService {
       url += '?v=' + this.configOptions.AppVersion;
     }
     if (this.configOptions.BustCache) {
-      url += '?t=' + this.makeId();
+      if (this.configOptions.AppVersion !== '') {
+        url += '&';
+      } else {
+        url += '?';
+      }
+      url += 't=' + this.makeId();
     }
     return url;
   }
