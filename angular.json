@@ -127,7 +127,7 @@
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
             "tsConfig": "projects/ngx-configure/tsconfig.lib.json",
-            "project": "projects/ngx-configure/ng-package.json"
+            "project": "projects/ngx-configure/ng-package.json",
           },
           "configurations": {
             "production": {
@@ -158,5 +158,8 @@
       }
     }
   },
-  "defaultProject": "ngx-configure-app"
+  "defaultProject": "ngx-configure-app",
+  "cli": {
+    "analytics": false
+  }
 }
