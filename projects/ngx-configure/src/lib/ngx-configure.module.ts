@@ -21,7 +21,7 @@ import { NgxConfigureOptions } from './ngx-configure-options';
   ]
 })
 export class NgxConfigureModule {
-  public static forRoot(): ModuleWithProviders {
+  public static forRoot(): ModuleWithProviders<NgxConfigureModule> {
     return {
       ngModule: NgxConfigureModule,
       providers: [NgxConfigureService, NgxConfigureOptions]

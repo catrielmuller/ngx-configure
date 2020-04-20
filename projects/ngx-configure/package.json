@@ -11,6 +11,7 @@
     "angular 6",
     "angular 7",
     "angular 8",
+    "angular 9",
     "json"
   ],
   "author": "Catriel Müller",
@@ -23,9 +24,9 @@
     "email": "catrielmuller@gmail.com",
     "url": "https://github.com/catrielmuller/ngx-configure/issues"
   },
-  "version": "8.0.0",
+  "version": "9.0.0",
   "peerDependencies": {
-    "@angular/common": "^8.1.0",
-    "@angular/core": "^8.1.0"
+    "@angular/common": ">6.0.0",
+    "@angular/core": ">6.0.0"
   }
 }
